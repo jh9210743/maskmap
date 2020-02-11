@@ -1,0 +1,60 @@
+#sidebar {
+  background-color: antiquewhite;
+  width: 30%;
+  height: 100%;
+}
+#sidebar ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#sidebar ul li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: rgb(155, 71, 167);
+  width: 100%;
+  box-shadow: 0 0 10px #585858;
+  border-radius: 15px;
+  margin: 10px 15px 0 15px;
+}
+#sidebar ul li .title {
+  background-color: rgb(100, 141, 127);
+  width: 80%;
+}
+#sidebar ul li .content {
+  background-color: rgb(22, 80, 60);
+  width: 80%;
+}
+#sidebar ul li .storage {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(102, 136, 209);
+  width: 80%;
+}
+#sidebar ul li .storage .adult {
+  /* display: flex;
+  justify-content: center; */
+  width: 40%;
+  margin: 0 5% 0 0;
+  background-color: red;
+  border-radius: 5px;
+}
+#sidebar ul li .storage .item {
+  flex: 0 1 100%;
+}
+#sidebar ul li .storage .child {
+  display: flex;
+  justify-content: center;
+  width: 40%;
+  background-color: red;
+  border-radius: 5px;
+}
+
+#map {
+  background-color: aqua;
+  height: 100%;
+}
