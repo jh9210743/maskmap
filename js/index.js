@@ -1,3 +1,4 @@
+import axios from 'axios';
 // const result = (async function() {
 //   try {
 //     const response = await axios.get(

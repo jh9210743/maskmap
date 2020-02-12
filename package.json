@@ -1,22 +1,25 @@
 {
-  "name": "maskmap",
-  "version": "1.0.0",
-  "description": "",
-  "main": "main.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jh9210743/maskmap.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jh9210743/maskmap/issues"
-  },
-  "homepage": "https://github.com/jh9210743/maskmap#readme",
-  "devDependencies": {
-    "axios": "^0.19.2"
-  }
+    "name": "maskmap",
+    "version": "1.0.0",
+    "description": "",
+    "main": "main.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "webpack"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jh9210743/maskmap.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/jh9210743/maskmap/issues"
+    },
+    "homepage": "https://github.com/jh9210743/maskmap#readme",
+    "devDependencies": {
+        "axios": "^0.19.2",
+        "webpack": "^4.41.6",
+        "webpack-cli": "^3.3.11"
+    }
 }
