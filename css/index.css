@@ -1,8 +1,15 @@
 html {
     font-family: '微軟正黑體';
 }
+.container {
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
 .header {
-    height: 5em;
+    height: 10vh;
+    width: 100%;
     display: flex;
     align-items: center;
 }
@@ -50,18 +57,19 @@ html {
     flex-wrap: wrap;
     background-color: rgb(228, 228, 228);
     width: 35%;
-    height: 100%;
-    margin: 0 0 0 25px;
     border-radius: 10px;
+    height: 90vh;
 }
 .searchbar {
     display: flex;
     justify-content: center;
-    margin: 15px 0 15px;
+    align-items: center;
+    margin: 1em 0 0 1em;
     width: 100%;
 }
 .searchbar input {
     width: 70%;
+    height: 2em;
     font-size: 1em;
     font-family: '微軟正黑體';
     margin: 0 5px 0 0;
@@ -83,17 +91,24 @@ html {
 }
 .buydate {
     width: 100%;
-    margin: 1em 0 1em 30px;
+    margin: 0 0 10px 30px;
+    display: flex;
+    align-items: flex-end;
 }
 .datetype {
     font-size: 2.5em;
     font-weight: bold;
 }
+.date {
+    margin: 0 10px 0 5px;
+}
+
 .infobar {
     width: 60%;
-    margin: 0 0 15px 25px;
+    margin: 0 0 0 25px;
     font-size: 0.8em;
 }
+
 .infobar .infoitem {
     margin: 8px 0 0 0;
 }
@@ -118,14 +133,16 @@ html {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    overflow-y: scroll;
+    height: 65vh;
 }
 
 .sidebar ul li {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     flex-wrap: wrap;
-    background-color: rgb(231, 229, 229);
+    background-color: rgb(245, 243, 243);
     width: 85%;
     box-shadow: 0 0 10px #a09f9f;
     border-radius: 15px;
@@ -137,12 +154,30 @@ html {
     width: 100%;
     margin: 10px 0 10px 0;
 }
+.sidebar ul li .storage .full {
+    background-color: rgb(3, 95, 83);
+    background-image: url(../img/ic_stock_full.png);
+    background-repeat: no-repeat;
+    background-position: bottom right;
+}
+.sidebar ul li .storage .few {
+    background-color: rgb(230, 126, 8);
+    background-image: url(../img/ic_stock_few.png);
+    background-repeat: no-repeat;
+    background-position: bottom right;
+}
+.sidebar ul li .storage .none {
+    background-color: rgb(182, 178, 174);
+    background-image: url(../img/ic_stock_none.png);
+    background-repeat: no-repeat;
+    background-position: bottom right;
+}
 .sidebar ul li .storage .adult {
     width: 40%;
     margin: 0 10px 0 0;
     padding: 5px 0 5px 5px;
     color: #ffffff;
-    background-color: rgb(3, 95, 83);
+
     border-radius: 5px;
 }
 .sidebar ul li .storage .adult .item {
@@ -156,7 +191,7 @@ html {
     margin: 0 10px 0 0;
     padding: 5px 0 5px 5px;
     color: #ffffff;
-    background-color: rgb(230, 126, 8);
+
     border-radius: 5px;
 }
 .sidebar ul li .storage .child .item {
@@ -170,15 +205,84 @@ html {
     display: flex;
     justify-content: start;
     margin: 10px 0 10px 0;
+    width: 100%;
 }
-.sidebar ul li .content {
+
+.sidebar ul li .title[data-time='open']::before {
+    content: '';
+    background-color: rgb(3, 95, 83);
+    width: 5px;
+    border-radius: 0 3px 3px 0;
+    margin: 0 10px 0 0;
+}
+.sidebar ul li .title[data-time='nearclose']::before {
+    content: '';
+    background-color: rgb(230, 126, 8);
+    width: 5px;
+    border-radius: 0 3px 3px 0;
+    margin: 0 10px 0 0;
+}
+.sidebar ul li .title .name {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+.sidebar ul li .title .distance {
     display: flex;
-    justify-content: start;
-    background-color: rgb(22, 80, 60);
-    width: 80%;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6em;
+    margin: 0 10px 0 5px;
+}
+.sidebar ul li .title[data-time='open'] .status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+    font-size: 0.8em;
+    color: rgb(1, 128, 89);
+    background-color: rgb(217, 228, 221);
+    border-radius: 5px;
+}
+.sidebar ul li .title[data-time='nearclose'] .status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+    font-size: 0.8em;
+    color: rgb(230, 126, 8);
+    background-color: rgb(231, 220, 207);
+    border-radius: 5px;
+}
+.sidebar ul li .detail {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0 5px 10px;
+}
+.sidebar ul li .detail a {
+    color: unset;
+    font-size: 0.8em;
+    margin: 0 15px 0 0;
+}
+.sidebar ul li .phone {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0 20px 10px;
+}
+
+.sidebar ul li .phone a {
+    color: unset;
+    font-size: 0.8em;
+    margin: 0 15px 0 0;
 }
 
 #map {
     background-color: aqua;
+    width: 60%;
     height: 100%;
 }
