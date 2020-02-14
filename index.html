@@ -2,130 +2,136 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Document</title>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
-  <link rel="stylesheet" type="text/css" href="./css/reset.css" />
-  <link rel="stylesheet" type="text/css" href="./css/index.css" />
-  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.css">
+	</link>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.Default.css">
+	</link>
+	<link rel="stylesheet" type="text/css" href="./css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="./css/index.css" />
+
 </head>
 
 <body>
-  <div class="container">
-    <div class="header">
-      <a href="/"><img src="./img/logo.png" alt="">口罩即時查</a>
-      <div class="menu">
-        <ul>
-          <li class="item">口罩供給現狀</li>
-          <li class="item">口罩哪裡買</li>
-        </ul>
-      </div>
-    </div>
-    <div class="sidebar">
-      <div class="searchbar">
-        <input type="text" placeholder="目前位置" />
-        <button id="search">搜尋</button>
-      </div>
-      <div class="buydate">
-        <span class="datetype">奇數</span>
-        <span class="date">購買日</span>
-        <a href=""><img src="./img/ic_help.png" alt=""></a>
-      </div>
-      <div class="infobar">
-        <div class="infoitem">距離5km以內的供應商</div>
-        <div class="infoitem">資訊更新時間：2020-2-12</div>
-      </div>
-      <div class="refresh">
-        <button>重整列表</button>
-      </div>
-      <ul>
-        <li>
-          <div class="storage">
-            <div class="adult full">
-              <div class="item">成人口罩數量</div>
-              <div class="num">98片</div>
-            </div>
-            <div class="child few">
-              <div class="item">兒童口罩數量</div>
-              <div class="num">26片</div>
-            </div>
-          </div>
+	<div class="container">
+		<div class="header">
+			<a href="/"><img src="./img/logo.png" alt="">口罩即時查</a>
+			<div class="menu">
+				<ul>
+					<li class="item">口罩供給現狀</li>
+					<li class="item">口罩哪裡買</li>
+				</ul>
+			</div>
+		</div>
+		<div class="sidebar">
+			<div class="searchbar">
+				<input type="text" placeholder="目前位置" />
+				<button id="search">搜尋</button>
+			</div>
+			<div class="buydate">
+				<span class="datetype">奇數</span>
+				<span class="date">購買日</span>
+				<a href=""><img src="./img/ic_help.png" alt=""></a>
+			</div>
+			<div class="infobar">
+				<div class="infoitem">距離5km以內的供應商</div>
+				<div class="infoitem">資訊更新時間：2020-2-12</div>
+			</div>
+			<div class="refresh">
+				<button>重整列表</button>
+			</div>
+			<ul>
+				<li>
+					<div class="storage">
+						<div class="adult full">
+							<div class="item">成人口罩數量</div>
+							<div class="num">98片</div>
+						</div>
+						<div class="child few">
+							<div class="item">兒童口罩數量</div>
+							<div class="num">26片</div>
+						</div>
+					</div>
 
-          <div class="title" data-time="open">
-            <div class="name">常清藥局</div>
-            <div class="distance">3km</div>
-            <div class="status">營業中</div>
-          </div>
-          <div class="detail">
-            <span>地址 新北市中和區永和路1段35巷10號</span>
-            <a href="" class="outlink">於地圖查看</a>
-          </div>
-          <div class="phone">
-            <span>電話 02-22958741</span>
-            <a href="" class="outlink">撥打電話</a>
-          </div>
-        </li>
-        <li>
-          <div class="storage">
-            <div class="adult few">
-              <div class="item">成人口罩數量</div>
-              <div class="num">15片</div>
-            </div>
-            <div class="child none">
-              <div class="item">兒童口罩數量</div>
-              <div class="num">0片</div>
-            </div>
-          </div>
+					<div class="title" data-time="open">
+						<div class="name">常清藥局</div>
+						<div class="distance">3km</div>
+						<div class="status">營業中</div>
+					</div>
+					<div class="detail">
+						<span>地址 新北市中和區永和路1段35巷10號</span>
+						<a href="" class="outlink">於地圖查看</a>
+					</div>
+					<div class="phone">
+						<span>電話 02-22958741</span>
+						<a href="" class="outlink">撥打電話</a>
+					</div>
+				</li>
+				<li>
+					<div class="storage">
+						<div class="adult few">
+							<div class="item">成人口罩數量</div>
+							<div class="num">15片</div>
+						</div>
+						<div class="child none">
+							<div class="item">兒童口罩數量</div>
+							<div class="num">0片</div>
+						</div>
+					</div>
 
-          <div class="title" data-time="nearclose">
-            <div class="name">常清藥局</div>
-            <div class="distance">3km</div>
-            <div class="status">即將休息</div>
-          </div>
-          <div class="detail">
-            <span class="address">地址　新北市中和區永和路1段35巷10號</span>
-            <a href="" class="outlink">於地圖查看</a>
-          </div>
-          <div class="phone">
-            <span>電話　02-22958741</span>
-            <a href="" class="outlink">撥打電話</a>
-          </div>
-        </li>
-        <li>
-          <div class="storage">
-            <div class="adult few">
-              <div class="item">成人口罩數量</div>
-              <div class="num">15片</div>
-            </div>
-            <div class="child full">
-              <div class="item">兒童口罩數量</div>
-              <div class="num">162片</div>
-            </div>
-          </div>
+					<div class="title" data-time="nearclose">
+						<div class="name">常清藥局</div>
+						<div class="distance">3km</div>
+						<div class="status">即將休息</div>
+					</div>
+					<div class="detail">
+						<span class="address">地址　新北市中和區永和路1段35巷10號</span>
+						<a href="" class="outlink">於地圖查看</a>
+					</div>
+					<div class="phone">
+						<span>電話　02-22958741</span>
+						<a href="" class="outlink">撥打電話</a>
+					</div>
+				</li>
+				<li>
+					<div class="storage">
+						<div class="adult few">
+							<div class="item">成人口罩數量</div>
+							<div class="num">15片</div>
+						</div>
+						<div class="child full">
+							<div class="item">兒童口罩數量</div>
+							<div class="num">162片</div>
+						</div>
+					</div>
 
-          <div class="title" data-time="open">
-            <div class="name">常清藥局</div>
-            <div class="distance">3km</div>
-            <div class="status">營業中</div>
-          </div>
-          <div class="detail">
-            <span>地址　新北市中和區永和路1段35巷10號</span>
-            <a href="" class="outlink">於地圖查看</a>
-          </div>
-          <div class="phone">
-            <span>電話　02-22958741</span>
-            <a href="" class="outlink">撥打電話</a>
-          </div>
-        </li>
+					<div class="title" data-time="open">
+						<div class="name">常清藥局</div>
+						<div class="distance">3km</div>
+						<div class="status">營業中</div>
+					</div>
+					<div class="detail">
+						<span>地址　新北市中和區永和路1段35巷10號</span>
+						<a href="" class="outlink">於地圖查看</a>
+					</div>
+					<div class="phone">
+						<span>電話　02-22958741</span>
+						<a href="" class="outlink">撥打電話</a>
+					</div>
+				</li>
 
-      </ul>
-    </div>
-    <div id="map"></div>
-  </div>
-  <script src="./js/index.js"></script>
+			</ul>
+		</div>
+		<div id="map"></div>
+	</div>
+	<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/leaflet.markercluster.js"></script>
+	<script src="./js/index.js"></script>
 </body>
 
 </html>

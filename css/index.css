@@ -59,7 +59,7 @@ html {
     justify-content: center;
     flex-wrap: wrap;
     background-color: rgb(228, 228, 228);
-    width: 35%;
+    width: 30%;
     border-radius: 10px;
     height: 90vh;
 }
@@ -98,6 +98,9 @@ html {
     display: flex;
     align-items: flex-end;
 }
+.buydate a {
+    margin: 0 0 -5px 0;
+}
 .datetype {
     font-size: 2.5em;
     font-weight: bold;
@@ -130,6 +133,10 @@ html {
     border: 2px solid black;
     border-radius: 20px;
 }
+.refresh button:hover {
+    color: #ffffff;
+    background-color: #000000;
+}
 
 .sidebar ul {
     display: flex;
@@ -146,45 +153,44 @@ html {
     align-items: center;
     flex-wrap: wrap;
     background-color: rgb(245, 243, 243);
-    width: 85%;
+    width: 80%;
     box-shadow: 0 0 10px #a09f9f;
     border-radius: 15px;
-    margin: 10px 15px 0 15px;
+    margin: 10px 20px 0 15px;
 }
 .sidebar ul li .storage {
     display: flex;
     justify-content: center;
     width: 100%;
-    margin: 10px 0 10px 0;
+    margin: 20px 0 10px 0;
 }
 .sidebar ul li .storage .full {
     background-color: rgb(3, 95, 83);
     background-image: url(../img/ic_stock_full.png);
     background-repeat: no-repeat;
-    background-position: bottom right;
+    background-position: 100% 80%;
 }
 .sidebar ul li .storage .few {
     background-color: rgb(230, 126, 8);
     background-image: url(../img/ic_stock_few.png);
     background-repeat: no-repeat;
-    background-position: bottom right;
+    background-position: 100% 80%;
 }
 .sidebar ul li .storage .none {
     background-color: rgb(182, 178, 174);
     background-image: url(../img/ic_stock_none.png);
     background-repeat: no-repeat;
-    background-position: bottom right;
+    background-position: 100% 80%;
 }
 .sidebar ul li .storage .adult {
     width: 40%;
     margin: 0 10px 0 0;
     padding: 5px 0 5px 5px;
     color: #ffffff;
-
     border-radius: 5px;
 }
 .sidebar ul li .storage .adult .item {
-    margin: 8px 0 15px 10px;
+    margin: 10px 0 15px 10px;
 }
 .sidebar ul li .storage .adult .num {
     margin: 8px 0 15px 10px;
@@ -198,7 +204,7 @@ html {
     border-radius: 5px;
 }
 .sidebar ul li .storage .child .item {
-    margin: 8px 0 15px 10px;
+    margin: 10px 0 15px 10px;
 }
 .sidebar ul li .storage .child .num {
     margin: 8px 0 15px 10px;
@@ -241,9 +247,9 @@ html {
     align-items: center;
     justify-content: center;
     width: 15%;
-    font-size: 0.8em;
+    font-size: 0.9em;
     color: rgb(1, 128, 89);
-    background-color: rgb(217, 228, 221);
+    background-color: rgb(231, 245, 243);
     border-radius: 5px;
 }
 .sidebar ul li .title[data-time='nearclose'] .status {
@@ -251,9 +257,9 @@ html {
     align-items: center;
     justify-content: center;
     width: 15%;
-    font-size: 0.8em;
+    font-size: 0.9em;
     color: rgb(230, 126, 8);
-    background-color: rgb(231, 220, 207);
+    background-color: rgb(254, 245, 230);
     border-radius: 5px;
 }
 .sidebar ul li .detail {
@@ -285,6 +291,81 @@ html {
 }
 
 #map {
-    width: 60%;
+    width: 65%;
     height: 90vh;
+}
+.poptitle {
+    font: 24px '微軟正黑體';
+    font-weight: 'bold';
+}
+.popcontent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0 10px 0;
+    font: 24px '微軟正黑體';
+}
+.masknum-adult {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    margin: 0 10px 0 0;
+    flex-shrink: 0;
+    border-radius: 5px;
+}
+.masknum-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    flex-shrink: 0;
+    border-radius: 5px;
+}
+.s-full {
+    color: #ffffff;
+    background-color: rgb(1, 50, 90);
+}
+.s-few {
+    color: #ffffff;
+    background-color: rgb(230, 126, 8);
+}
+.s-none {
+    color: #ffffff;
+    background-color: rgb(182, 178, 174);
+}
+/* Cluster Style */
+.marker-cluster-small {
+    background-color: rgba(181, 226, 140, 0.6);
+}
+.marker-cluster-small div {
+    background-color: rgba(110, 204, 57, 0.6);
+}
+.marker-cluster-medium {
+    background-color: rgba(241, 211, 87, 0.6);
+}
+.marker-cluster-medium div {
+    background-color: rgba(240, 194, 12, 0.6);
+}
+.marker-cluster-large {
+    background-color: rgba(253, 156, 115, 0.6);
+}
+.marker-cluster-large div {
+    background-color: rgba(241, 128, 23, 0.6);
+}
+.marker-cluster {
+    background-clip: padding-box;
+    border-radius: 20px;
+}
+.marker-cluster div {
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
+    margin-top: 5px;
+    text-align: center;
+    border-radius: 15px;
+    font: 12px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+.marker-cluster span {
+    line-height: 30px;
 }
