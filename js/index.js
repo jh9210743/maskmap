@@ -9,6 +9,7 @@ let userPosition = new L.LatLng(22.604964, 120.300476);
 let positionMarker;
 let rawData;
 let calculateData;
+let filterData;
 // 要使用的icon內容設定
 const icon = {
     redIcon: new L.Icon({
@@ -58,9 +59,10 @@ function getRawData() {
 async function renderHandler() {
     rawData = await getRawData();
     calculateData = addAttr(rawData);
-    renderMapInfo(calculateData);
-    renderSidebarHeadInfo(calculateData);
-    renderSidebarMedInfo(calculateData);
+    filterData = setDistance(calculateData);
+    renderMapInfo(filterData);
+    renderSidebarHeadInfo(filterData);
+    renderSidebarMedInfo(filterData);
     document.getElementById('refreshbtn').addEventListener('click', refresh);
 }
 // 新增需要用到的屬性並回傳新的格式資料
@@ -104,6 +106,9 @@ function addAttr(data) {
         return calculateInfo;
     });
     return calculateInfoAll;
+}
+function setDistance(data) {
+    return data.filter(el => el.distance < 5);
 }
 // 渲染地圖層資訊
 function renderMapInfo(data) {
@@ -150,8 +155,8 @@ function renderSidebarHeadInfo(data) {
 function renderSidebarMedInfo(data) {
     console.log('renderSidebarMedInfo');
     let renderContent = '';
-    const filterDistanceData = data.filter(el => el.distance < 5);
-    filterDistanceData.forEach(el => {
+    // const filterDistanceData = data.filter(el => el.distance < 5);
+    data.forEach(el => {
         renderContent += `<li>
         <div class="storage">
             <div class="adult ${el.properties.mask_adult_storage}">
