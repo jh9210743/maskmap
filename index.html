@@ -7,6 +7,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 	<title>Document</title>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.css">
 	</link>
@@ -33,20 +34,20 @@
 				<input type="text" placeholder="目前位置" />
 				<button id="search">搜尋</button>
 			</div>
-			<div class="buydate">
-				<span class="datetype">奇數</span>
-				<span class="date">購買日</span>
+			<div class="buyday">
+				<span class="daytype">奇數</span>
+				<span class="day">購買日</span>
 				<a href=""><img src="./img/ic_help.png" alt=""></a>
 			</div>
 			<div class="infobar">
 				<div class="infoitem">距離5km以內的供應商</div>
-				<div class="infoitem">資訊更新時間：2020-2-12</div>
+				<div class="infoitem" id='updatetime'>資訊更新時間:</div>
 			</div>
 			<div class="refresh">
-				<button>重整列表</button>
+				<button id='refreshbtn'>重整列表</button>
 			</div>
 			<ul id='medinfo'>
-				<li>
+				<!-- <li>
 					<div class="storage">
 						<div class="adult full">
 							<div class="item">成人口罩數量</div>
@@ -123,7 +124,7 @@
 						<span>電話　02-22958741</span>
 						<a href="" class="outlink">撥打電話</a>
 					</div>
-				</li>
+				</li> -->
 
 			</ul>
 		</div>

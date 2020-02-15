@@ -92,20 +92,20 @@ html {
     border-style: none;
     border-radius: 5px;
 }
-.buydate {
+.buyday {
     width: 100%;
     margin: 0 0 10px 30px;
     display: flex;
     align-items: flex-end;
 }
-.buydate a {
+.buyday a {
     margin: 0 0 -5px 0;
 }
-.datetype {
+.daytype {
     font-size: 2.5em;
     font-weight: bold;
 }
-.date {
+.day {
     margin: 0 10px 0 5px;
 }
 
