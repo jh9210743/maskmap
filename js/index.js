@@ -6,6 +6,7 @@ var map = L.map('map', {
 
 // 使用者當前位置容器
 let userPosition = new L.LatLng(22.604964, 120.300476);
+let distance;
 let positionMarker;
 let rawData;
 let calculateData;
@@ -107,13 +108,17 @@ function addAttr(data) {
     });
     return calculateInfoAll;
 }
-function setDistance(data) {
-    return data.filter(el => el.distance < 5);
+// 設定要抓取的距離
+function setDistance(data, distance = 5) {
+    if (distance !== 'all') {
+        return data.filter(el => el.distance < parseInt(distance));
+    } else {
+        return data;
+    }
 }
 // 渲染地圖層資訊
 function renderMapInfo(data) {
     console.log(data);
-
     var markers = new L.MarkerClusterGroup().addTo(map);
     for (var i = 0; data.length > i; i++) {
         markers.addLayer(
@@ -150,12 +155,12 @@ function renderSidebarHeadInfo(data) {
     const time = data[0].properties.updated;
 
     daydom.innerHTML = daytype;
-    timedom.innerHTML = time;
+    timedom.innerHTML = `資訊更新時間: ${time}`;
 }
 function renderSidebarMedInfo(data) {
-    console.log('renderSidebarMedInfo');
+    // console.log('renderSidebarMedInfo');
+    const ul = document.getElementById('medinfo');
     let renderContent = '';
-    // const filterDistanceData = data.filter(el => el.distance < 5);
     data.forEach(el => {
         renderContent += `<li>
         <div class="storage">
@@ -184,8 +189,10 @@ function renderSidebarMedInfo(data) {
     </li>
     `;
     });
-    const ul = document.getElementById('medinfo');
-    ul.innerHTML = renderContent;
+    const noresult = `<li>
+        <h3>很抱歉，您設定的條件無法找到結果，請重新設定</h3>
+        </li>`;
+    ul.innerHTML = renderContent || noresult;
 }
 function setUserPosition() {
     navigator.geolocation.getCurrentPosition(function(location) {
@@ -204,10 +211,23 @@ function setUserPosition() {
 function refresh() {
     console.log('refresh');
     setUserPosition();
-    renderSidebarMedInfo(calculateData);
+    // renderSidebarMedInfo(calculateData);
+    // 會讓地圖render變慢
+}
+function distanceHandler() {
+    const optionList = document.querySelectorAll('.distance-option');
+    for (let i = 0; i < optionList.length; i++) {
+        optionList[i].addEventListener('click', function() {
+            console.log(optionList[i].dataset.distance);
+            const filterData = setDistance(calculateData, optionList[i].dataset.distance);
+            console.log(filterData);
+            renderSidebarMedInfo(filterData);
+        });
+    }
 }
 setUserPosition();
 renderHandler();
+distanceHandler();
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);

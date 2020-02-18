@@ -34,16 +34,27 @@
 				<input type="text" placeholder="目前位置" />
 				<button id="search">搜尋</button>
 			</div>
-			<div class="buyday">
-				<span class="daytype">奇數</span>
-				<span class="day">購買日</span>
-				<a href=""><img src="./img/ic_help.png" alt=""></a>
-			</div>
 			<div class="infobar">
-				<div class="infoitem">距離5km以內的供應商</div>
-				<div class="infoitem" id='updatetime'>資訊更新時間:</div>
+				<div class='buyday'>
+					<span class="daytype">奇數</span>
+					<span class="day">購買日</span>
+					<a href=""><img src="./img/ic_help.png" alt=""></a>
+				</div>
+				<div class="otherinfo">
+					<span id='updatetime'></span>
+				</div>
 			</div>
-
+			<div class="setdistance">
+				<span class="distance-title">
+					距離
+				</span>
+				<ul>
+					<li class="distance-option active" data-distance='3'>3</li>
+					<li class="distance-option" data-distance='5'>5</li>
+					<li class="distance-option" data-distance='10'>10</li>
+					<li class="distance-option" data-distance='all'>全部</li>
+				</ul>
+			</div>
 			<div class="refresh">
 				<button id='refreshbtn'>重整列表</button>
 			</div>
