@@ -1,168 +1,176 @@
 // 設定map變數為leaflet物件
-var map = L.map('map', {
-    center: [22.604964, 120.300476],
-    zoom: 15
-});
+var map = L.map("map", {
+  center: [22.604964, 120.300476],
+  zoom: 15
+})
 
 // 使用者當前位置容器
-let userPosition = new L.LatLng(22.604964, 120.300476);
-let distance;
-let positionMarker;
-let rawData;
-let calculateData;
-let filterData;
+let userPosition = new L.LatLng(22.604964, 120.300476)
+// 使用者設定距離
+let distance
+let positionMarker
+let rawData
+let calculateData
+let filterdistancedata
+let filtermasktypedata
 // 要使用的icon內容設定
 const icon = {
-    redIcon: new L.Icon({
-        iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
-        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41]
-    }),
-    greenIcon: new L.Icon({
-        iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
-        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41]
-    }),
-    orangeIcon: new L.Icon({
-        iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
-        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41]
-    }),
-    greyIcon: new L.Icon({
-        iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-grey.png',
-        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41]
-    })
-};
+  redIcon: new L.Icon({
+    iconUrl:
+      "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png",
+    shadowUrl:
+      "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  }),
+  greenIcon: new L.Icon({
+    iconUrl:
+      "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png",
+    shadowUrl:
+      "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  }),
+  orangeIcon: new L.Icon({
+    iconUrl:
+      "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png",
+    shadowUrl:
+      "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  }),
+  greyIcon: new L.Icon({
+    iconUrl:
+      "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-grey.png",
+    shadowUrl:
+      "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  })
+}
 // 獲取原始資料
 function getRawData() {
-    return axios
-        .get(
-            'https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json?fbclid=IwAR17_yFHM9x1Sq_us2j-cI3fRkyx9j7XiVibo2pqHY-Nl4uiW-esxRejZVc'
-        )
-        .then(({ data: { features } }) => {
-            return features;
-        });
+  return axios
+    .get(
+      "https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json?fbclid=IwAR17_yFHM9x1Sq_us2j-cI3fRkyx9j7XiVibo2pqHY-Nl4uiW-esxRejZVc"
+    )
+    .then(({ data: { features } }) => {
+      return features
+    })
 }
 // 畫面更新主函式
 async function renderHandler() {
-    rawData = await getRawData();
-    calculateData = addAttr(rawData);
-    filterData = setDistance(calculateData);
-    renderMapInfo(filterData);
-    renderSidebarHeadInfo(filterData);
-    renderSidebarMedInfo(filterData);
-    document.getElementById('refreshbtn').addEventListener('click', refresh);
+  rawData = await getRawData()
+  calculateData = addAttr(rawData)
+  filterdistancedata = setDistance(calculateData)
+  filtermasktypedata = setMasktype(calculateData)
+  renderMapInfo(filtermasktypedata)
+  renderSidebarHeadInfo(filtermasktypedata)
+  renderSidebarMedInfo(filtermasktypedata)
+  //   document.getElementById("refreshbtn").addEventListener("click", refresh)
 }
 // 新增需要用到的屬性並回傳新的格式資料
 function addAttr(data) {
-    const calculateInfoAll = data.map(el => {
-        let calculateInfo = {
-            properties: el.properties,
-            geoinfo: el.geometry.coordinates,
-            distance: (
-                map.distance(userPosition, new L.LatLng(el.geometry.coordinates[1], el.geometry.coordinates[0])) / 1000
-            ).toFixed(1)
-        };
-        switch (true) {
-            case el.properties.mask_adult > 80:
-                calculateInfo.properties.mask_adult_storage = 'full';
-                break;
-            case 80 > el.properties.mask_adult && el.properties.mask_adult > 0:
-                calculateInfo.properties.mask_adult_storage = 'few';
-                break;
-            case el.properties.mask_adult === 0:
-                calculateInfo.properties.mask_adult_storage = 'none';
-                break;
-            default:
-                calculateInfo.properties.mask_adult_storage = 'none';
-                break;
-        }
-        switch (true) {
-            case el.properties.mask_child > 80:
-                calculateInfo.properties.mask_child_storage = 'full';
-                break;
-            case 80 > el.properties.mask_child && el.properties.mask_child > 0:
-                calculateInfo.properties.mask_child_storage = 'few';
-                break;
-            case el.properties.mask_child === 0:
-                calculateInfo.properties.mask_child_storage = 'none';
-                break;
-            default:
-                calculateInfo.properties.mask_child_storage = 'none';
-                break;
-        }
-        return calculateInfo;
-    });
-    return calculateInfoAll;
-}
-// 設定要抓取的距離
-function setDistance(data, distance = 5) {
-    if (distance !== 'all') {
-        return data.filter(el => el.distance < parseInt(distance));
-    } else {
-        return data;
+  const calculateInfoAll = data.map(el => {
+    let calculateInfo = {
+      properties: el.properties,
+      geoinfo: el.geometry.coordinates,
+      distance: (
+        map.distance(
+          userPosition,
+          new L.LatLng(el.geometry.coordinates[1], el.geometry.coordinates[0])
+        ) / 1000
+      ).toFixed(1)
     }
+    switch (true) {
+      case el.properties.mask_adult > 80:
+        calculateInfo.properties.mask_adult_storage = "full"
+        break
+      case 80 > el.properties.mask_adult && el.properties.mask_adult > 0:
+        calculateInfo.properties.mask_adult_storage = "few"
+        break
+      case el.properties.mask_adult === 0:
+        calculateInfo.properties.mask_adult_storage = "none"
+        break
+      default:
+        calculateInfo.properties.mask_adult_storage = "none"
+        break
+    }
+    switch (true) {
+      case el.properties.mask_child > 80:
+        calculateInfo.properties.mask_child_storage = "full"
+        break
+      case 80 > el.properties.mask_child && el.properties.mask_child > 0:
+        calculateInfo.properties.mask_child_storage = "few"
+        break
+      case el.properties.mask_child === 0:
+        calculateInfo.properties.mask_child_storage = "none"
+        break
+      default:
+        calculateInfo.properties.mask_child_storage = "none"
+        break
+    }
+    return calculateInfo
+  })
+  return calculateInfoAll
 }
+
 // 渲染地圖層資訊
 function renderMapInfo(data) {
-    console.log(data);
-    var markers = new L.MarkerClusterGroup().addTo(map);
-    for (var i = 0; data.length > i; i++) {
-        markers.addLayer(
-            L.marker([data[i].geoinfo[1], data[i].geoinfo[0]], {
-                get icon() {
-                    switch (true) {
-                        case data[i].properties.mask_adult > 80:
-                            return icon.greenIcon;
-                        case 80 > data[i].properties.mask_adult && data[i].properties.mask_adult > 0:
-                            return icon.orangeIcon;
-                        case data[i].properties.mask_adult === 0:
-                            return icon.greyIcon;
-                        default:
-                            return icon.greyIcon;
-                    }
-                }
-            }).bindPopup(
-                `<div class='popcontent'>
+  console.log(data)
+  var markers = new L.MarkerClusterGroup().addTo(map)
+  for (var i = 0; data.length > i; i++) {
+    markers.addLayer(
+      L.marker([data[i].geoinfo[1], data[i].geoinfo[0]], {
+        get icon() {
+          switch (true) {
+            case data[i].properties.mask_adult > 80:
+              return icon.greenIcon
+            case 80 > data[i].properties.mask_adult &&
+              data[i].properties.mask_adult > 0:
+              return icon.orangeIcon
+            case data[i].properties.mask_adult === 0:
+              return icon.greyIcon
+            default:
+              return icon.greyIcon
+          }
+        }
+      }).bindPopup(
+        `<div class='popcontent'>
             <div class='masknum-adult s-${data[i].properties.mask_adult_storage}'>${data[i].properties.mask_adult}</div>
             <div class='masknum-child s-${data[i].properties.mask_child_storage}'>${data[i].properties.mask_child}</div>
         </div>
         `
-            )
-        );
-    }
-    map.addLayer(markers);
+      )
+    )
+  }
+  map.addLayer(markers)
 }
 function renderSidebarHeadInfo(data) {
-    // 奇偶數天計算
-    const daydom = document.querySelector('.daytype');
-    const daytype = ['偶數', '奇數'][moment().days() % 2];
-    // 資料更新時間
-    const timedom = document.getElementById('updatetime');
-    const time = data[0].properties.updated;
+  // 奇偶數天計算
+  const daydom = document.querySelector(".daytype")
+  const daytype = ["偶數", "奇數"][moment().days() % 2]
+  // 資料更新時間
+  const timedom = document.getElementById("updatetime")
+  const time = data[0].properties.updated
 
-    daydom.innerHTML = daytype;
-    timedom.innerHTML = `資訊更新時間: ${time}`;
+  daydom.innerHTML = daytype
+  timedom.innerHTML = `資訊更新時間: ${time}`
 }
 function renderSidebarMedInfo(data) {
-    // console.log('renderSidebarMedInfo');
-    const ul = document.getElementById('medinfo');
-    let renderContent = '';
-    data.forEach(el => {
-        renderContent += `<li>
+  // console.log('renderSidebarMedInfo');
+  const ul = document.getElementById("medinfo")
+  let renderContent = ""
+  data.forEach(el => {
+    renderContent += `<li>
         <div class="storage">
             <div class="adult ${el.properties.mask_adult_storage}">
                 <div class="item">成人口罩數量</div>
@@ -187,47 +195,102 @@ function renderSidebarMedInfo(data) {
             <a href="" class="outlink">撥打電話</a>
         </div>
     </li>
-    `;
-    });
-    const noresult = `<li>
+    `
+  })
+  const noresult = `<li>
         <h3>很抱歉，您設定的條件無法找到結果，請重新設定</h3>
-        </li>`;
-    ul.innerHTML = renderContent || noresult;
+        </li>`
+  ul.innerHTML = renderContent || noresult
 }
 function setUserPosition() {
-    navigator.geolocation.getCurrentPosition(function(location) {
-        userPosition = new L.LatLng(location.coords.latitude, location.coords.longitude);
-        if (positionMarker) {
-            map.removeLayer(positionMarker);
-            positionMarker = L.marker(userPosition, { icon: icon.greenIcon });
-            positionMarker.addTo(map);
-        } else {
-            positionMarker = L.marker(userPosition, { icon: icon.redIcon });
-            positionMarker.addTo(map);
-        }
-        map.panTo(userPosition);
-    });
-}
-function refresh() {
-    console.log('refresh');
-    setUserPosition();
-    // renderSidebarMedInfo(calculateData);
-    // 會讓地圖render變慢
-}
-function distanceHandler() {
-    const optionList = document.querySelectorAll('.distance-option');
-    for (let i = 0; i < optionList.length; i++) {
-        optionList[i].addEventListener('click', function() {
-            console.log(optionList[i].dataset.distance);
-            const filterData = setDistance(calculateData, optionList[i].dataset.distance);
-            console.log(filterData);
-            renderSidebarMedInfo(filterData);
-        });
+  navigator.geolocation.getCurrentPosition(function(location) {
+    userPosition = new L.LatLng(
+      location.coords.latitude,
+      location.coords.longitude
+    )
+    if (positionMarker) {
+      map.removeLayer(positionMarker)
+      positionMarker = L.marker(userPosition, { icon: icon.redIcon })
+      positionMarker.addTo(map)
+    } else {
+      positionMarker = L.marker(userPosition, { icon: icon.greenIcon })
+      positionMarker.addTo(map)
     }
+    map.panTo(userPosition)
+  })
 }
-setUserPosition();
-renderHandler();
-distanceHandler();
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+
+// function refresh() {
+//   console.log("refresh")
+//   setUserPosition()
+//   filterdistancedata = setDistance(calculateData)
+//   filtermasktypedata = setMasktype(filterdistancedata)
+//   renderSidebarMedInfo(filtermasktypedata)
+//   // 會讓地圖render變慢
+// }
+
+// 設定要抓取的距離
+function setDistance(data, distance = 5) {
+  if (distance !== "all") {
+    return data.filter(el => el.distance < parseInt(distance))
+  } else {
+    return data
+  }
+}
+// 改變設定條件後的樣式
+function optionstylechange(dom, domlist) {
+  for (i = 0; i < domlist.length; i++) {
+    domlist[i].classList.remove("active")
+  }
+  dom.classList.add("active")
+}
+//
+function distanceHandler() {
+  const optionList = document.querySelectorAll(".distance-option")
+  for (let i = 0; i < optionList.length; i++) {
+    optionList[i].addEventListener("click", function() {
+      filterdistancedata = setDistance(
+        calculateData,
+        optionList[i].dataset.distance
+      )
+      renderSidebarMedInfo(filterdistancedata)
+      optionstylechange(optionList[i], optionList)
+    })
+  }
+}
+
+// 設定要抓取的口罩種類
+function setMasktype(data, masktype = "all") {
+  console.log(data)
+  if (masktype !== "all") {
+    if (masktype === "adult") {
+      return data.filter(el => el.properties.mask_adult > 0)
+    } else {
+      return data.filter(el => el.properties.mask_child > 0)
+    }
+  } else {
+    return data
+  }
+}
+function masktypeHandler() {
+  const optionList = document.querySelectorAll(".masktype-option")
+  for (let i = 0; i < optionList.length; i++) {
+    optionList[i].addEventListener("click", function() {
+      const filtermasktypedata = setMasktype(
+        filterdistancedata,
+        optionList[i].dataset.masktype
+      )
+      renderSidebarMedInfo(filtermasktypedata)
+      optionstylechange(optionList[i], optionList)
+    })
+  }
+}
+
+setUserPosition()
+renderHandler()
+distanceHandler()
+masktypeHandler()
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution:
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map)
