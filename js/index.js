@@ -4,11 +4,15 @@ var map = L.map('map', {
     zoom: 15
 });
 
+// 地圖marker
+let markers;
 // 使用者當前位置容器
 let userPosition = new L.LatLng(22.604964, 120.300476);
 // 使用者設定距離
 let distance;
+// 使用者當前位置
 let positionMarker;
+// 取得的資料與計算資料
 let rawData;
 let calculateData;
 let filterdistancedata;
@@ -55,6 +59,8 @@ function getRawData() {
             'https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json?fbclid=IwAR17_yFHM9x1Sq_us2j-cI3fRkyx9j7XiVibo2pqHY-Nl4uiW-esxRejZVc'
         )
         .then(({ data: { features } }) => {
+            console.log(features);
+
             return features;
         });
 }
@@ -114,8 +120,11 @@ function addAttr(data) {
 
 // 渲染地圖層資訊
 function renderMapInfo(data) {
-    console.log(data);
-    var markers = new L.MarkerClusterGroup().addTo(map);
+    // var markers = new L.MarkerClusterGroup().addTo(map);
+    if (markers) {
+        map.removeLayer(markers);
+    }
+    markers = new L.MarkerClusterGroup().addTo(map);
     for (var i = 0; data.length > i; i++) {
         markers.addLayer(
             L.marker([data[i].geoinfo[1], data[i].geoinfo[0]], {
@@ -148,7 +157,16 @@ function renderSidebarHeadInfo(data) {
     const daytype = ['偶數', '奇數'][moment().days() % 2];
     // 資料更新時間
     const timedom = document.getElementById('updatetime');
-    const time = data[0].properties.updated;
+    let time;
+    data.some(el => {
+        if (el.properties.updated) {
+            time = el.properties.updated;
+            return true;
+        } else {
+            return false;
+        }
+    });
+    console.log(data);
 
     daydom.innerHTML = daytype;
     timedom.innerHTML = `資訊更新時間: ${time}`;
