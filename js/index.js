@@ -172,7 +172,7 @@ function renderSidebarHeadInfo(data) {
     timedom.innerHTML = `資訊更新時間: ${time}`;
 }
 function renderSidebarMedInfo(data) {
-    // console.log('renderSidebarMedInfo');
+    console.log(data);
     const ul = document.getElementById('medinfo');
     let renderContent = '';
     data.forEach(el => {
@@ -194,11 +194,11 @@ function renderSidebarMedInfo(data) {
         </div>
         <div class="detail">
             <span>地址 ${el.properties.address}</span>
-            <a href="" class="outlink">於地圖查看</a>
+            <a target="_blank" href="https://www.google.com/maps/dir/?api=1&destination=${el.geoinfo[1]},${el.geoinfo[0]}" class="outlink">於地圖查看</a>
         </div>
         <div class="phone">
-            <span>電話 ${el.properties.phone}</span>
-            <a href="" class="outlink">撥打電話</a>
+            <span>電話</span>
+            <a href="tel:${el.properties.phone}" class="outlink">撥打電話</a>
         </div>
     </li>
     `;
