@@ -5,7 +5,7 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-	<title>Document</title>
+	<title>口罩地圖</title>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
@@ -19,26 +19,29 @@
 </head>
 
 <body>
+	<div id='explain' class='explain d-none'>
+		<img class='explainimg' src="./asset/explain.jpg" alt="">
+	</div>
 	<div class="container">
 		<div class="header">
 			<a href="/"><img src="./img/logo.png" alt="">口罩即時查</a>
 			<div class="menu">
 				<ul>
-					<li class="item">口罩供給現狀</li>
-					<li class="item">口罩哪裡買</li>
+					<li class="item">口罩地圖</li>
+					<li class="item">口罩購買規則</li>
 				</ul>
 			</div>
 		</div>
 		<div class="sidebar">
 			<div class="searchbar">
-				<input type="text" placeholder="名稱、地址" id="searchinput"/>
+				<input type="text" placeholder="名稱、地址" id="searchinput" />
 				<button id="search">搜尋</button>
 			</div>
 			<div class="infobar">
 				<div class='buyday'>
 					<span class="daytype">奇數</span>
 					<span class="day">購買日</span>
-					<a href=""><img src="./img/ic_help.png" alt=""></a>
+					<a href="" id='explainbtn'><img src="./img/ic_help.png" alt=""></a>
 				</div>
 				<div class="otherinfo">
 					<span id='updatetime'></span>

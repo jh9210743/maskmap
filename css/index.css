@@ -10,6 +10,7 @@ html {
     flex-wrap: wrap;
     justify-content: space-around;
 }
+
 .header {
     height: 10vh;
     width: 100%;
@@ -100,6 +101,21 @@ html {
 .day {
     margin: 0 10px 0 5px;
 }
+.explain {
+    z-index: 999;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(160, 160, 160, 0.9);
+    width: 100%;
+    height: 100%;
+}
+.explain > .frame {
+}
+.d-none {
+    display: none;
+}
 .infobar {
     width: 100%;
     margin: 0 0 0 25px;
@@ -133,6 +149,7 @@ html {
     flex-grow: 0.8;
     display: flex;
     justify-content: start;
+    align-items: center;
 }
 
 .setdistance > ul .distance-option,
