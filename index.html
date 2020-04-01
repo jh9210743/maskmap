@@ -20,17 +20,20 @@
 
 <body>
 	<div id='explain' class='explain d-none'>
-		<img class='explainimg' src="./asset/explain.jpg" alt="">
+		<div class="frame">
+			<img class="close" src="./asset/close.png" alt="">
+			<img class='explainimg' src="./asset/explain.jpg" alt="">
+		</div>
 	</div>
 	<div class="container">
 		<div class="header">
 			<a href="/"><img src="./img/logo.png" alt="">口罩即時查</a>
-			<div class="menu">
+			<!-- <div class="menu">
 				<ul>
 					<li class="item">口罩地圖</li>
 					<li class="item">口罩購買規則</li>
 				</ul>
-			</div>
+			</div> -->
 		</div>
 		<div class="sidebar">
 			<div class="searchbar">
@@ -52,9 +55,9 @@
 					距離
 				</span>
 				<ul>
-					<li class="distance-option" data-distance='3'>3</li>
-					<li class="distance-option  active" data-distance='5'>5</li>
-					<li class="distance-option" data-distance='10'>10</li>
+					<li class="distance-option" data-distance='3'>3km</li>
+					<li class="distance-option  active" data-distance='5'>5km</li>
+					<li class="distance-option" data-distance='10'>10km</li>
 					<li class="distance-option" data-distance='all'>全部</li>
 				</ul>
 			</div>
@@ -67,11 +70,7 @@
 					<li class="masktype-option" data-masktype='adult'>成人</li>
 					<li class="masktype-option" data-masktype='child'>兒童</li>
 				</ul>
-				<!-- <div class="refresh">
-					<button id='refreshbtn'>重整列表</button>
-				</div> -->
 			</div>
-
 			<ul id='medinfo'>
 				<!-- <li>
 					<div class="storage">
@@ -151,7 +150,6 @@
 						<a href="" class="outlink">撥打電話</a>
 					</div>
 				</li> -->
-
 			</ul>
 		</div>
 		<div id="map"></div>
