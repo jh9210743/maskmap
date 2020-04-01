@@ -236,7 +236,7 @@ function renderSidebarMedInfo(data) {
   ul.innerHTML = renderContent || noresult
 }
 function setUserPosition() {
-  navigator.geolocation.getCurrentPosition(function(location) {
+  navigator.geolocation.watchPosition(function(location) {
     userPosition = new L.LatLng(
       location.coords.latitude,
       location.coords.longitude
