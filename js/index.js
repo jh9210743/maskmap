@@ -73,7 +73,7 @@ function getRawData() {
       "https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json?fbclid=IwAR17_yFHM9x1Sq_us2j-cI3fRkyx9j7XiVibo2pqHY-Nl4uiW-esxRejZVc"
     )
     .then(({ data: { features } }) => {
-      console.log(features)
+      // console.log(features)
       return features
     })
 }
@@ -191,13 +191,13 @@ function renderSidebarHeadInfo(data) {
       return false
     }
   })
-  console.log(data)
+  // console.log(data)
 
   daydom.innerHTML = daytype()
   timedom.innerHTML = `資訊更新時間: ${time}`
 }
 function renderSidebarMedInfo(data) {
-  console.log(data)
+  // console.log(data)
   const ul = document.getElementById("medinfo")
   let renderContent = ""
   data.forEach(el => {
@@ -297,7 +297,7 @@ function distanceHandler() {
 
 // 設定要抓取的口罩種類
 function setMasktype(data, masktype = "all") {
-  console.log(data)
+  // console.log(data)
   if (masktype !== "all") {
     if (masktype === "adult") {
       return data.filter(el => el.properties.mask_adult > 0)
