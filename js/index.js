@@ -66,6 +66,16 @@ const icon = {
   })
 }
 
+function LoadingtoggleHandler(status) {
+  if (status === "load") {
+    console.log("load")
+    document.querySelector(".backgray").classList.remove("d-none")
+  } else {
+    console.log("done")
+    document.querySelector(".backgray").classList.add("d-none")
+  }
+}
+
 // 獲取原始資料
 function getRawData() {
   return axios
@@ -87,6 +97,7 @@ async function renderHandler() {
   renderMapInfo(filtermasktypedata)
   renderSidebarHeadInfo(filtermasktypedata)
   renderSidebarMedInfo(filtermasktypedata)
+  LoadingtoggleHandler("done")
   //   document.getElementById("refreshbtn").addEventListener("click", refresh)
 }
 

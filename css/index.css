@@ -1,6 +1,24 @@
 html {
   font-family: "微軟正黑體";
 }
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 3px solid hsla(226, 100%, 47%, 0.2);
+  border-top-color: #041186;
+  border-radius: 50%;
+  z-index: 9999;
+  width: 3em;
+  height: 3em;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .sidebar ul::-webkit-scrollbar {
   display: none;
 }
@@ -100,7 +118,7 @@ html {
 .day {
   margin: 0 10px 0 5px;
 }
-.explain {
+.backgray {
   z-index: 9999;
   position: absolute;
   display: flex;
