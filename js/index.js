@@ -160,9 +160,21 @@ function renderMapInfo(data) {
           }
         }
       }).bindPopup(
-        `<div class='popcontent'>
-            <div class='masknum-adult s-${data[i].properties.mask_adult_storage}'>${data[i].properties.mask_adult}</div>
-            <div class='masknum-child s-${data[i].properties.mask_child_storage}'>${data[i].properties.mask_child}</div>
+        `
+        <div class="popup">
+          <div class="poptitle">
+            <div class="name">${data[i].properties.name}</div>
+            <span class="titleinfo">${data[i].properties.phone}</span>
+            <span class="titleinfo">
+              <a target="blank" href="https://www.google.com/maps/dir/?api=1&destination=${data[i].geoinfo[1]},${data[i].geoinfo[0]}">
+              ${data[i].properties.address}
+              </a>
+            </span>
+          </div>
+          <div class='popcontent'>
+            <span>成人</span><div class='masknum-adult s-${data[i].properties.mask_adult_storage}'>${data[i].properties.mask_adult}</div>
+            <span>兒童</span><div class='masknum-child s-${data[i].properties.mask_child_storage}'>${data[i].properties.mask_child}</div>
+          </div>
         </div>
         `
       )
@@ -191,13 +203,13 @@ function renderSidebarHeadInfo(data) {
       return false
     }
   })
-  // console.log(data)
 
   daydom.innerHTML = daytype()
   timedom.innerHTML = `資訊更新時間: ${time}`
 }
+
+// render 側邊攔藥局資訊
 function renderSidebarMedInfo(data) {
-  // console.log(data)
   const ul = document.getElementById("medinfo")
   let renderContent = ""
   data.forEach(el => {
@@ -215,7 +227,6 @@ function renderSidebarMedInfo(data) {
         <div class="title" data-time="open">
             <div class="name">${el.properties.name}</div>
             <div class="distance">${el.distance}km</div>
-            <div class="status">營業中</div>
         </div>
         <div class="detail">
             <span>地址 ${el.properties.address}</span>
@@ -235,8 +246,9 @@ function renderSidebarMedInfo(data) {
         </li>`
   ul.innerHTML = renderContent || noresult
 }
+
 function setUserPosition() {
-  navigator.geolocation.watchPosition(function(location) {
+  navigator.geolocation.getCurrentPosition(function(location) {
     userPosition = new L.LatLng(
       location.coords.latitude,
       location.coords.longitude
